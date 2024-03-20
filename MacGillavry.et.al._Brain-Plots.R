@@ -3,6 +3,8 @@
 library(grid)
 library(cowplot)
 
+## Note: first run the code in the analysis script to import relevant dataframes and phylogenetic trees. 
+
 #################################################################################
 #################################################################################
 
