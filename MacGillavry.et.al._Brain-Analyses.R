@@ -116,7 +116,7 @@ data.1 <- filter(data, !(species %in% c("Lycocorax_pyrrhopterus", "Manucodia_job
 
 data.1$species
 
-# Create comparative dataset for caper 
+## Create comparative dataset for caper 
 comparative.data.1 <- comparative.data(phy = bop.tree, 
                                        data = data.1, 
                                        names.col = species, 
@@ -130,7 +130,7 @@ comparative.data.1 <- comparative.data(phy = bop.tree,
 m.ols.i<-gls(logBehav.Richness ~ logComplexity.Fux, data=data.1, method="ML")
 summary(m.ols.i)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.i <- pgls(logBehav.Richness ~ logComplexity.Fux, data = comparative.data.1, 
                  lambda = "ML")
 
@@ -146,7 +146,7 @@ hist(residuals(m.pgls.i)) # Normality of residuals
 m.ols.ii<-gls(logBehav.Diversity ~ logComplexity.Fux, data=data.1, method="ML")
 summary(m.ols.ii)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.ii <- pgls(logBehav.Diversity ~ logComplexity.Fux, data = comparative.data.1, 
                   lambda = "ML")
 summary(m.pgls.ii)
@@ -162,7 +162,7 @@ hist(residuals(m.pgls.ii)) # Normality of residuals
 m.ols.iii<-gls(logBehav.Diversity ~ logBehav.Richness, data=data, method="ML")
 summary(m.ols.iii)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.iii <- pgls(logBehav.Diversity ~ logBehav.Richness, data = comparative.data.1, 
                    lambda = "ML")
 summary(m.pgls.iii) 
@@ -183,7 +183,7 @@ hist(residuals(m.pgls.iii)) # Normality of residuals
 m.ols.1<-gls(logECV ~ logBehav.Richness, data=data.poly, method="ML")
 summary(m.ols.1)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.1 <- pgls(logECV ~ logBehav.Richness, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.1)
@@ -196,7 +196,7 @@ hist(residuals(m.pgls.1)) # Normality of residuals; clearly not normally distrib
 m.ols.2<-gls(logECV ~ logBehav.Diversity, data=data.poly, method="ML")
 summary(m.ols.2)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.2 <- pgls(logECV ~ logBehav.Diversity, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.2)
@@ -208,7 +208,7 @@ hist(residuals(m.pgls.2)) # Normality of residuals; clearly not normally distrib
 m.ols.3<-gls(logECV ~ logAcoust.Richness, data=data.poly, method="ML")
 summary(m.ols.3)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.3 <- pgls(logECV ~ logAcoust.Richness, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.3)
@@ -220,7 +220,7 @@ hist(residuals(m.pgls.3)) # Normality of residuals; clearly not normally distrib
 m.ols.4<-gls(logECV ~ logAcoust.Diversity, data=data.poly, method="ML")
 summary(m.ols.4)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.4 <- pgls(logECV ~ logAcoust.Diversity, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.4)
@@ -232,7 +232,7 @@ hist(residuals(m.pgls.4)) # Normality of residuals; clearly not normally distrib
 m.ols.5<-gls(logECV ~ logComplexity.Fux, data=data.poly, method="ML")
 summary(m.ols.5)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.5 <- pgls(logECV ~ logComplexity.Fux, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.5)
@@ -254,7 +254,7 @@ hist(residuals(m.pgls.5)) # Normality of residuals.
 ## Quick inspection of the scaling relationship 
 plot(data$logECV, data$logMass) 
 
-# Run the pgls model
+## Run the pgls model
 bm.pgls <- pgls(logECV ~ logMass, data = comparative.data, lambda = "ML")
 
 ## Check the output 
@@ -278,7 +278,7 @@ plot(data$logECV, data$ResidECV)
 m.ols.6<-gls(ResidECV ~ logComplexity.Fux, data=data.poly, method="ML")
 summary(m.ols.6)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.6 <- pgls(ResidECV ~ logBehav.Richness, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.6)
@@ -290,7 +290,7 @@ hist(residuals(m.pgls.6)) # Normality of residuals.
 m.ols.7<-gls(ResidECV ~ logBehav.Diversity, data=data.poly, method="ML")
 summary(m.ols.7)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.7 <- pgls(ResidECV ~ logBehav.Diversity, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.7)
@@ -302,7 +302,7 @@ hist(residuals(m.pgls.7)) # Normality of residuals.
 m.ols.8<-gls(ResidECV ~ logAcoust.Richness, data=data.poly, method="ML")
 summary(m.ols.8)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.8 <- pgls(ResidECV ~ logAcoust.Richness, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.8)
@@ -314,7 +314,7 @@ hist(residuals(m.pgls.8)) # Normality of residuals.
 m.ols.9<-gls(ResidECV ~ logAcoust.Diversity, data=data.poly, method="ML")
 summary(m.ols.9)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.9 <- pgls(ResidECV ~ logAcoust.Diversity, data = comparative.data.core, 
                  lambda = "ML")
 summary(m.pgls.9)
@@ -343,7 +343,7 @@ m.pgls.10c <- pgls(ResidECV ~ logComplexity.Fux, data = comparative.data.core,
                    lambda = 0.0001)
 summary(m.pgls.10c)
 
-## Comparing AICc values of each model 
+### Comparing AICc values of each model (residual ECV ~ behavioural complexity) ###
 
 library(MuMIn) # Load the MuMIn package
 
@@ -366,8 +366,7 @@ m.pgls.11 <- pgls(logECV ~ as.factor(mating.system), data = comparative.data,
 summary(m.pgls.11)
 hist(residuals(m.pgls.11)) # Normality of residuals; clearly not normally distributed. 
 
-
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
 m.pgls.12 <- pgls(ResidECV ~ as.factor(mating.system), data = comparative.data, 
                   lambda = 1) # We set lambda to '1' here as we don't need to compute it using ML, since all manucodes are one clade.
 summary(m.pgls.12)
