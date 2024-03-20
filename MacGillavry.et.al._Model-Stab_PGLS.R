@@ -1,36 +1,38 @@
 ## Packages
 library(ggplot2) # Plotting
 library(dplyr) # Data wrangling 
-library(phytools) #open tree
-library(ggplot2) #plots
-library(nlme) # GLS analysis
+library(phytools) # open tree
+library(ggplot2) # plots
+library(caper) # PGLS analysis 
+
+## Note: first run the code in the analysis script to import and prepare the data and tree. 
 
 #####################################################
 ### Create a new dataset for each missing species ###
 #####################################################
 
-# Create a list to store new datasets
+## Create a list to store new datasets
 dropped_datasets <- list()
 
-# Loop through each observation and create a new dataset without that observation
+## Loop through each observation and create a new dataset without that observation
 for (i in 1:nrow(data.poly)) {
   dropped_datasets[[i]] <- data.poly[-i, ]
 }
 
-# Accessing any of the dropped datasets, for example, the first one:
+## Accessing any of the dropped datasets, for example, the first one:
 dropped_datasets[[1]]
 
 #######################################################
 ### Now turn all of these into comparative datasets ###
 #######################################################
 
-# Create a list to store comparative dataframes
+## Create a list to store comparative dataframes
 comparative_dataframes <- list()
 
-# Load the phylogenetic tree (assuming core.bop.tree is available)
+## Load the phylogenetic tree (assuming core.bop.tree is available)
 core_bop_tree <- core.bop.tree
 
-# Loop through each dropped dataset and create a comparative dataframe
+## Loop through each dropped dataset and create a comparative dataframe
 for (i in 1:length(dropped_datasets)) {
   # Create comparative dataframe for the current dropped dataset
   comp_data <- comparative.data(phy = core_bop_tree,
@@ -40,54 +42,54 @@ for (i in 1:length(dropped_datasets)) {
                                 na.omit = FALSE,
                                 warn.dropped = TRUE)
   
-  # Add the comparative dataframe to the list
+## Add the comparative dataframe to the list
   comparative_dataframes[[i]] <- comp_data
 }
 
-# Accessing any of the comparative dataframes, for example, the first one:
+## Accessing any of the comparative dataframes, for example, the first one:
 comparative_dataframes[[1]]
 
 ######################################################
 ### Now run a model for each one of these datasets ###
 ######################################################
 
-# Create an empty list to store the models and their summaries
+## Create an empty list to store the models and their summaries
 model_summary_list <- list()
 
-# Loop through each dropped dataset
+## Loop through each dropped dataset
 for (i in 1:length(comparative_dataframes)) {
-  # Fit the PGLS model on the current dataset
+## Fit the PGLS model on the current dataset
   m_pgls <- pgls(ResidECV ~ logComplexity.Fux, data = comparative_dataframes[[i]], lambda = "ML")
   
-  # Obtain the summary of the model
+## Obtain the summary of the model
   m_summary <- summary(m_pgls)
   
-  # Store the model and its summary in the list
+## Store the model and its summary in the list
   model_summary_list[[i]] <- list(model = m_pgls, summary = m_summary)
 }
 
-# Now you have a list of PGLS models and their summaries stored in model_summary_list
+## Now you have a list of PGLS models and their summaries stored in model_summary_list
 model_summary_list[1]
 
 ##################################################################
 ### Extracting the estimate and p-val for behavioural richness ###
 ##################################################################
 
-# Create an empty dataframe to store estimates and p-values
+## Create an empty dataframe to store estimates and p-values
 estimate_pvalue_dataframe <- data.frame(source_model = character(),
                                         estimate = numeric(),
                                         p_value = numeric(),
                                         stringsAsFactors = FALSE)
 
-# Loop through each model summary
+## Loop through each model summary
 for (i in 1:length(model_summary_list)) {
-  # Extract estimate for logBehav.Richness from the model summary
+## Extract estimate for logBehav.Richness from the model summary
   estimate <- coef(model_summary_list[[i]]$model)["logComplexity.Fux"]
   
-  # Extract p-value for logBehav.Richness from the model summary
+## Extract p-value for logBehav.Richness from the model summary
   p_value <- model_summary_list[[i]]$summary$coefficients["logComplexity.Fux", "Pr(>|t|)"]
   
-  # Add the values to the dataframe along with the source model
+## Add the values to the dataframe along with the source model
   estimate_pvalue_dataframe <- rbind(estimate_pvalue_dataframe, 
                                      data.frame(source_model = paste("Model", i),
                                                 estimate = estimate,
@@ -109,7 +111,7 @@ ggplot(estimate_pvalue_dataframe, aes(x = "", y = estimate, color = p_value)) +
   labs(x = "",
        y = "Estimate",
        color = "p-value", 
-       title = expression("Stability of PGLS model: Residual ECV ~ log"[10]*" Behavioural Complexity")) + # Adding a subscript '10' using expression
+       title = expression("Lambda = ML")) + # Adding a subscript '10' using expression
   theme_minimal() + 
   ylim(-0.05, 0.35) +
   theme(axis.text=element_text(size=20),
@@ -128,5 +130,8 @@ comparative_dataframes[[5]]$data # Ciccinurus respublica
 comparative_dataframes[[8]]$data # Paradisaea minor
 comparative_dataframes[[9]]$data # Paradisaea rubra
 comparative_dataframes[[11]]$data # Parotia lawesii
+
+## To create all the plots shown in figure S3, alter the lambda value in line 60 and 
+## change the title of the plot accordingly in line 112. 
 
 
