@@ -326,11 +326,33 @@ hist(residuals(m.pgls.9)) # Normality of residuals.
 m.ols.10<-gls(ResidECV ~ logComplexity.Fux, data=data.poly, method="ML")
 summary(m.ols.10)
 
-# Model using PGLS (phylogeny corrected) 
+## Model using PGLS (phylogeny corrected) 
+## With lambda computed with ML 
 m.pgls.10 <- pgls(ResidECV ~ logComplexity.Fux, data = comparative.data.core, 
                   lambda = "ML")
 summary(m.pgls.10)
 hist(residuals(m.pgls.10)) # Normality of residuals. 
+
+## With lambda set to 1 
+m.pgls.10b <- pgls(ResidECV ~ logComplexity.Fux, data = comparative.data.core, 
+                  lambda = 1)
+summary(m.pgls.10b)
+
+## With lambda set to 0
+m.pgls.10c <- pgls(ResidECV ~ logComplexity.Fux, data = comparative.data.core, 
+                   lambda = 0.0001)
+summary(m.pgls.10c)
+
+## Comparing AICc values of each model 
+
+library(MuMIn) # Load the MuMIn package
+
+AICc(m.pgls.10) # -50.33705
+AICc(m.pgls.10b) # -46.66546
+AICc(m.pgls.10c) # -49.34989
+round(Weights(AICc(m.pgls.10, m.pgls.10b, m.pgls.10c)), 3) # AICc weights
+
+## The ML model is the best based on Akaike weights  
 
 #################################################################################
 #################################################################################
