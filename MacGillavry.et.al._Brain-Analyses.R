@@ -400,23 +400,23 @@ fit
 fit$CI[1,]
 range(xx)
 
-# Fit an ancestral state character reconstruction
+## Fit an ancestral state character reconstruction
 fit <- phytools::fastAnc(bop.tree, xx, vars = TRUE, CI = TRUE)
 
-# Make a dataframe with trait values at the tips
+## Make a dataframe with trait values at the tips
 td <- data.frame(
   node = nodeid(bop.tree, names(xx)),
   trait = xx)
 
-# Make a dataframe with estimated trait values at the nodes
+## Make a dataframe with estimated trait values at the nodes
 nd <- data.frame(node = names(fit$ace), trait = fit$ace)
 
-# Combine these with the tree data for plotting with ggtree
+## Combine these with the tree data for plotting with ggtree
 d <- rbind(td, nd)
 d$node <- as.numeric(d$node)
 tree <- full_join(bop.tree, d, by = 'node')
 
-# Adjust plot margins and xlim
+## Adjust plot margins and xlim
 ggtree(
   tree, 
   aes(color = trait), 
@@ -453,28 +453,28 @@ fit
 fit$CI[1,]
 range(yy)
 
-# Fit an ancestral state character reconstruction
+## Fit an ancestral state character reconstruction
 fit <- phytools::fastAnc(bop.tree, yy, vars = TRUE, CI = TRUE)
 
-# Make a dataframe with trait values at the tips
+## Make a dataframe with trait values at the tips
 td <- data.frame(
   node = nodeid(bop.tree, names(yy)),
   trait = yy)
 
-# Make a dataframe with estimated trait values at the nodes
+## Make a dataframe with estimated trait values at the nodes
 nd <- data.frame(node = names(fit$ace), trait = fit$ace)
 
-# Combine these with the tree data for plotting with ggtree
+## Combine these with the tree data for plotting with ggtree
 d <- rbind(td, nd)
 d$node <- as.numeric(d$node)
 tree <- full_join(bop.tree, d, by = 'node')
 
-# Combine these with the tree data for plotting with ggtree
+## Combine these with the tree data for plotting with ggtree
 d <- rbind(td, nd)
 d$node <- as.numeric(d$node)
 tree <- full_join(bop.tree, d, by = 'node')
 
-# Adjust plot margins and xlim
+## Adjust plot margins and xlim
 ggtree(
   tree,
   aes(color = trait), 
