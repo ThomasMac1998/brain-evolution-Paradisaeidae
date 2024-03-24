@@ -12,7 +12,28 @@ library(cowplot)
 
 ## Import the full dataset by Ksepka et al.: 
 all.birds <- read.csv("MacGillavry.et.al._Brain.Data.AllBirds.csv")
-head(all.birds, 52) # Quick inspection 
+head(all.birds, 53) # Quick inspection 
+All.birds.tree <- read.nexus("Ericson2000_µCT24032024_tree.nex")
+plot(All.birds.tree)
+str(All.birds.tree)
+All.birds.tree$tip.label
+
+## Read the CSV file and filter the data
+data.all.birds <- filter(read.csv("MacGillavry.et.al._Brain.Data.AllBirds.csv"), Order == "Passeriformes")
+summary(data.all.birds$species)
+
+## Computing ECV residuals for full bird dataset: 
+
+## Create comparative dataset for caper 
+comparative.data.full <- comparative.data(phy = All.birds.tree, 
+                                     data = data.all.birds, 
+                                     names.col = species, 
+                                     vcv = TRUE, 
+                                     na.omit = FALSE, 
+                                     warn.dropped = TRUE) 
+
+resid(pgls(log10(ECV) ~ log10(mass/1000), data = comparative.data.full, 
+            lambda = "ML")) # I manually added the residuals to the df... 
 
 ## Figure 1b: 
 ## Plot showing relationship of body mass to ECV across all songbirds 
@@ -20,7 +41,7 @@ head(all.birds, 52) # Quick inspection
 
 ggplot(data = filter(all.birds, Order == "Passeriformes"), 
        aes(x = log10(mass/1000), y = log10(ECV), color = Family == "Paradisaeidae")) +
-  geom_point(size = 3, stroke = 0.5, shape = 1, colour = "darkgrey") + 
+  geom_point(size = 3, stroke = 0.75, shape = 1, colour = "black") + 
   geom_point(size = 3, shape = 16) + 
   scale_color_manual(values = c("grey90", "#49A4B9")) + 
   ylab(expression(paste("log"[10], " ECV (mm"^"3", ")"))) + 
@@ -36,7 +57,7 @@ ggplot(data = filter(all.birds, Order == "Passeriformes"),
 ## Plot showing frequency histogram of absolute ECV across songbirds. 
 
 p1 <- ggplot(data = filter(all.birds, Order == "Passeriformes"), 
-             aes(x = (ECV/1000), fill = Family == "Paradisaeidae")) +
+             aes(x = as.numeric((ECV/1000)), fill = Family == "Paradisaeidae")) +
   geom_histogram(alpha = 1, bins = 35, colour = "black") + 
   scale_fill_manual(values = c("grey90", "#49A4B9")) + 
   xlab(expression(paste("ECV (cm"^"3", ")"))) + 
@@ -52,7 +73,7 @@ p1 <- ggplot(data = filter(all.birds, Order == "Passeriformes"),
 ## Plot showing frequency histogram of residual ECV across songbirds. 
 
 p2 <- ggplot(data = filter(all.birds, Order == "Passeriformes"), 
-             aes(x = ResidECV, fill = Family == "Paradisaeidae")) +
+             aes(x = as.numeric(ResidECV), fill = Family == "Paradisaeidae")) +
   geom_histogram(alpha = 1, bins = 35, colour = "black") + 
   scale_fill_manual(values = c("grey90", "#49A4B9")) + 
   xlab(expression(paste("Residual ECV"))) + 
