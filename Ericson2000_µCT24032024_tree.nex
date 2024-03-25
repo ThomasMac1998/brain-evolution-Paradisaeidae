@@ -1,0 +1,63 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=53;
+	taxlabels
+	Acanthisitta_chloris
+	Ptilonorhynchus_violaceus
+	Acanthorhynchus_superciliosus
+	Notiomystis_cincta
+	Corvus_corax
+	Corvus_macrorhynchos
+	Corvus_corone
+	Corvus_brachyrhynchos
+	Semioptera_wallacii
+	Ptiloris_victoriae
+	Ptiloris_paradiseus
+	Lophorina_superba
+	Ptiloris_magnificus
+	Seleucidis_melanoleucus
+	Paradisaea_rubra
+	Paradisaea_minor
+	Paradisaea_raggiana
+	Paradisaea_apoda
+	Cicinnurus_regius
+	Cicinnurus_magnificus
+	Cicinnurus_respublica
+	Astrapia_rothschildi
+	Astrapia_mayeri
+	Pteridophora_alberti
+	Parotia_lawesii
+	Lycocorax_pyrrhopterus
+	Phonygammus_keraudrenii
+	Manucodia_jobiensis
+	Manucodia_ater
+	Manucodia_chalybatus
+	Manucodia_comrii
+	Mohoua_novaeseelandiae
+	Mohoua_ochrocephala
+	Mohoua_albicilla
+	Riparia_riparia
+	Psalidoprocne_pristoptera
+	Hirundo_rustica
+	Passer_montanus
+	Passer_domesticus
+	Serinus_canaria
+	Helmitheros_vermivorum
+	Cinclus_mexicanus
+	Turdus_pallidus
+	Catharus_guttatus
+	Aplonis_atrifusca
+	Acridotheres_tristis
+	Sturnus_vulgaris
+	Furnarius_rufus
+	Dendrocolaptes_platyrostris
+	Cotinga_cotinga
+	Elaenia_albiceps
+	Tyrannus_tyrannus
+	Pitangus_sulphuratus
+;
+end;
+
+begin trees;
+	tree consensus = [&R] [&"consensus method"="Majority greedy clustering"](Acanthisitta_chloris:72.65269366289871,((Ptilonorhynchus_violaceus:58.76959989751501,(Acanthorhynchus_superciliosus:54.8846685868609,((Notiomystis_cincta:47.959442567603055,(((Corvus_corax:7.427338612572841,(Corvus_macrorhynchos:6.771417931092912,(Corvus_corone:3.587033807190192,Corvus_brachyrhynchos:3.587033807190168)[&"Consensus support(%)"=100.0]:3.184384123777954)[&"Consensus support(%)"=53.800000000000004]:0.6559206815861742)[&"Consensus support(%)"=100.0]:21.014120339544466,((((Semioptera_wallacii:8.63447741583049,((Ptiloris_victoriae:1.454659895674401,Ptiloris_paradiseus:1.454659895674401)[&"Consensus support(%)"=100.0]:5.088672472355519,(Lophorina_superba:5.154941044505992,Ptiloris_magnificus:5.1549410445038415)[&"Consensus support(%)"=100.0]:1.3883913235229333)[&"Consensus support(%)"=100.0]:2.09114504781642)[&"Consensus support(%)"=100.0]:1.7762900007618185,(Seleucidis_melanoleucus:9.813029384791713,(((Paradisaea_rubra:2.548710918527821,(Paradisaea_minor:1.129375496476232,(Paradisaea_raggiana:0.522200004883892,Paradisaea_apoda:0.522200004883912)[&"Consensus support(%)"=99.95]:0.6071754916008598)[&"Consensus support(%)"=100.0]:1.419335422059134)[&"Consensus support(%)"=100.0]:5.197550634747557,(Cicinnurus_regius:5.584118760319987,(Cicinnurus_magnificus:3.100162979048504,Cicinnurus_respublica:3.100162979048504)[&"Consensus support(%)"=100.0]:2.483955781289683)[&"Consensus support(%)"=100.0]:2.162142792957466)[&"Consensus support(%)"=100.0]:1.0147674884367142,(Astrapia_rothschildi:3.0539956569962095,Astrapia_mayeri:3.0539956570055695)[&"Consensus support(%)"=100.0]:5.707033384712817)[&"Consensus support(%)"=100.0]:1.0520003430871956)[&"Consensus support(%)"=72.39999999999999]:0.597738031799544)[&"Consensus support(%)"=100.0]:1.3420712313098253,(Pteridophora_alberti:9.165686553998986,Parotia_lawesii:9.165686553945989)[&"Consensus support(%)"=100.0]:2.587152093962855)[&"Consensus support(%)"=100.0]:9.353865258817496,(Lycocorax_pyrrhopterus:13.818707699978507,(Phonygammus_keraudrenii:10.503077668228526,(Manucodia_jobiensis:6.247057645430763,(Manucodia_ater:5.203470823594748,(Manucodia_chalybatus:3.8421049270321714,Manucodia_comrii:3.8421049270319214)[&"Consensus support(%)"=99.95]:1.3613658964789748)[&"Consensus support(%)"=83.05]:1.0435868218262225)[&"Consensus support(%)"=100.0]:4.2560200229025265)[&"Consensus support(%)"=100.0]:3.3156300317083325)[&"Consensus support(%)"=100.0]:7.287996206807479)[&"Consensus support(%)"=100.0]:7.33475504548494)[&"Consensus support(%)"=100.0]:10.902704808328497,(Mohoua_novaeseelandiae:8.88971477796001,(Mohoua_ochrocephala:4.4952611264666995,Mohoua_albicilla:4.4952611264666995)[&"Consensus support(%)"=100.0]:4.39445365152756)[&"Consensus support(%)"=100.0]:30.454448982595384)[&"Consensus support(%)"=100.0]:8.615278807027195)[&"Consensus support(%)"=100.0]:3.8199075054029095,((Riparia_riparia:19.660679473930777,(Psalidoprocne_pristoptera:18.98933892783592,Hirundo_rustica:18.989338927653787)[&"Consensus support(%)"=62.849999999999994]:0.671340546155367)[&"Consensus support(%)"=100.0]:26.111437284301406,(((Passer_montanus:7.180801472352341,Passer_domesticus:7.18080147235996)[&"Consensus support(%)"=100.0]:25.195584703650386,(Serinus_canaria:27.881313681974817,Helmitheros_vermivorum:27.881313682020604)[&"Consensus support(%)"=100.0]:4.495072494072929)[&"Consensus support(%)"=100.0]:12.459489135093506,((Cinclus_mexicanus:29.22294920597734,(Turdus_pallidus:18.509613478294746,Catharus_guttatus:18.509613478315757)[&"Consensus support(%)"=100.0]:10.7133357277118)[&"Consensus support(%)"=100.0]:0.872273990403535,(Aplonis_atrifusca:22.19781573575659,(Acridotheres_tristis:8.614757479684586,Sturnus_vulgaris:8.614757479703055)[&"Consensus support(%)"=100.0]:13.583058256040744)[&"Consensus support(%)"=100.0]:7.897407460621341)[&"Consensus support(%)"=100.0]:14.740652114858026)[&"Consensus support(%)"=100.0]:0.9362414471851679)[&"Consensus support(%)"=100.0]:6.007233314659949)[&"Consensus support(%)"=100.0]:3.1053185139711488)[&"Consensus support(%)"=100.0]:3.884931310616487)[&"Consensus support(%)"=100.0]:10.422154056996995,((Furnarius_rufus:18.096512010869123,Dendrocolaptes_platyrostris:18.096512010894852)[&"Consensus support(%)"=100.0]:36.08000443534877,(Cotinga_cotinga:35.20736705146821,(Elaenia_albiceps:22.154717773432996,(Tyrannus_tyrannus:13.283904787477473,Pitangus_sulphuratus:13.283904787505662)[&"Consensus support(%)"=100.0]:8.870812985972435)[&"Consensus support(%)"=100.0]:13.052649278079311)[&"Consensus support(%)"=100.0]:18.96914939487536)[&"Consensus support(%)"=100.0]:15.015237508088461)[&"Consensus support(%)"=100.0]:3.460939708369054);
+end;
