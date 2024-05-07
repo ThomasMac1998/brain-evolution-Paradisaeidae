@@ -18,7 +18,7 @@ bop.tree <- read.nexus("Ligon.et.al._UltrametricTree") # Import the tree as .nex
 plot(bop.tree) # Quick look at the tree
 summary(bop.tree)
 
-data <- read.csv("MacGillavry.et.al._Brain.Data.csv") # Import the dataframe as .csv
+data <- read.csv("Paradisaeidae_Brain.Data.csv") # Import the dataframe as .csv
 
 ## Log-transform continuous variables 
 data$logECV <- log10(data$ECV)
