@@ -11,7 +11,7 @@ library(cowplot)
 ### First, we want to see how the brains of the birds of paradise compare to other taxa: 
 
 ## Import the full dataset by Ksepka et al.: 
-all.birds <- read.csv("MacGillavry.et.al._Brain.Data.AllBirds.csv")
+all.birds <- read.csv("Paradisaeidae_Brain.Data.AllBirds.csv")
 head(all.birds, 53) # Quick inspection 
 All.birds.tree <- read.nexus("Ericson2000_µCT24032024_tree.nex")
 plot(All.birds.tree)
@@ -19,7 +19,7 @@ str(All.birds.tree)
 All.birds.tree$tip.label
 
 ## Read the CSV file and filter the data
-data.all.birds <- filter(read.csv("MacGillavry.et.al._Brain.Data.AllBirds.csv"), Order == "Passeriformes")
+data.all.birds <- filter(read.csv("Paradisaeidae_Brain.Data.AllBirds.csv"), Order == "Passeriformes")
 summary(data.all.birds$species)
 
 ## Computing ECV residuals for full bird dataset: 
@@ -52,6 +52,24 @@ ggplot(data = filter(all.birds, Order == "Passeriformes"),
         legend.title = element_blank()) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   guides(color = FALSE) 
+
+## Figure S3: Also for all Passeriformes included in Sayol et al. 2016
+
+sayol <- read.csv("Sayol2016_BrainSize.csv")
+
+ggplot(data = sayol, 
+       aes(x = log10(MASS), y = log10(BRAIN*1000), color = Taxon)) +
+  geom_point(size = 1.5, stroke = 0.75, shape = 1, colour = "black") + 
+  geom_point(size = 1.5, shape = 16) + 
+  scale_color_manual(values = c("Corvidae" = "black", "Paradisaeidae" = "#49A4B9", "Other Passeriformes" = "white")) + 
+  ylab(expression(paste("log"[10], " BRAIN VOLUME (mm"^"3", ")"))) + 
+  xlab(expression(paste("log"[10], " MASS (g)"))) +
+  theme_bw() + 
+  theme(axis.text=element_text(size=17),
+        axis.title=element_text(size=17),
+        legend.title = element_blank()) + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  guides(color = FALSE)
 
 ## Figure 1c: 
 ## Plot showing frequency histogram of absolute ECV across songbirds. 
@@ -300,7 +318,7 @@ ggarrange(clade.plot.a, clade.plot.b,
 ## Figures S1: 
 ## Plots showing ECV values for all samples per species. 
 
-sample.size <- read.csv("MacGillavry.et.al._Samples.csv")
+sample.size <- read.csv("Paradisaeidae_Brain.Samples.csv")
 
 ## Calculate the count of observations for each group
 observation_count <- sample.size %>%
