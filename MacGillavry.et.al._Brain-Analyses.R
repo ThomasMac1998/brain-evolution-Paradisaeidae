@@ -362,13 +362,13 @@ round(Weights(AICc(m.pgls.10, m.pgls.10b, m.pgls.10c)), 3) # AICc weights
 ## We set lambda = 1 in both models (all manucodes are monogamous and form a single clade). 
 
 m.pgls.11 <- pgls(logECV ~ as.factor(mating.system), data = comparative.data, 
-                  lambda = 1) # We set lambda to '1' here as we don't need to compute it using ML, since all manucodes are one clade.
+                  lambda = 0.0001) # We set lambda to '0' here as we just want to describe differences between the two clades
 summary(m.pgls.11)
 hist(residuals(m.pgls.11)) # Normality of residuals; clearly not normally distributed. 
 
-## Model using PGLS (phylogeny corrected) 
+# Model using PGLS (phylogeny corrected) 
 m.pgls.12 <- pgls(ResidECV ~ as.factor(mating.system), data = comparative.data, 
-                  lambda = 1) # We set lambda to '1' here as we don't need to compute it using ML, since all manucodes are one clade.
+                  lambda = 0.0001) # We set lambda to '1' here as we don't need to compute it using ML, since all manucodes are one clade.
 summary(m.pgls.12)
 hist(residuals(m.pgls.12)) # Normality of residuals; more or less. 
 
