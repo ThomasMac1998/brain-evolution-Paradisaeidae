@@ -359,12 +359,23 @@ round(Weights(AICc(m.pgls.10, m.pgls.10b, m.pgls.10c)), 3) # AICc weights
 
 ### Clade (represented by nating system) and brain volume ### 
 
-## We set lambda = 1 in both models (all manucodes are monogamous and form a single clade). 
+## We set lambda = 0 in both models as we wanted to test for general differences between clades; 
+## "Correcting" for phylogenetic relatedness would automatically remove any effect as all manucodes (& paradise crow) and 
+## Core Paradisaeidae form separate clades. 
 
 m.pgls.11 <- pgls(logECV ~ as.factor(mating.system), data = comparative.data, 
                   lambda = 0.0001) # We set lambda to '0' here as we just want to describe differences between the two clades
 summary(m.pgls.11)
 hist(residuals(m.pgls.11)) # Normality of residuals; clearly not normally distributed. 
+
+# The intercept for brain size is 3.592715 (3914.849 mm3) with clade at its baseline (monogamous)
+10^3.592715
+# The Core BoP species therefore have an intercept of 3.458181 (2871.977mm3) smaller than the monogamous clade 
+3.592715 + (-0.134534)
+10^3.458181
+3914.849 - 2871.977 # Difference between clades 
+# That translates to an average difference of 1042.872mm3 
+(1042.872 / 3914.849)*100 # Mono species' brains are, on average, 26.6% larger.  
 
 # Model using PGLS (phylogeny corrected) 
 m.pgls.12 <- pgls(ResidECV ~ as.factor(mating.system), data = comparative.data, 
